@@ -4,6 +4,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:state_extended/state_extended.dart';
+import 'package:userapp/utils/preference_utils.dart';
 
 import '../network/api_service.dart';
 import '../utils/loader.dart';
@@ -17,6 +18,7 @@ class LocationController extends StateXController{
     Loader.show();
     apiService.getZone(lat, lng).then((value){
       Loader.hide();
+      PreferenceUtils.saveZoneId(value.data!);
       context.go('/dashboard-page');
     }).catchError((e){
       Loader.hide();

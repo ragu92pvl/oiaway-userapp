@@ -5,6 +5,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:state_extended/state_extended.dart';
+import 'package:userapp/pages/category/all_category_page.dart';
 import 'package:userapp/pages/dashboard/category/category_page.dart';
 import 'package:userapp/pages/dashboard/home/home_page.dart';
 import 'package:userapp/pages/dashboard/orders/order_page.dart';
@@ -24,10 +25,11 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends StateX<DashboardPage> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   int _currentIndex = 0;
   final List<Widget> _screens = [
     HomePage(),
-    CategoryPage(),
+    AllCategoryPage(),
     OrderPage(),
     ServicePage(),
     ProfilePage(),

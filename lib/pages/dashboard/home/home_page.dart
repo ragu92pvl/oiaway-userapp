@@ -1,9 +1,11 @@
 
 
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:state_extended/state_extended.dart';
 import 'package:userapp/controller/home_controller.dart';
 import 'package:userapp/flutter_flow/flutter_flow_theme.dart';
+import 'package:userapp/pages/dashboard/home/buy_page.dart';
 import 'package:userapp/utils/preference_utils.dart';
 
 import '../../../constants/app_colors.dart';
@@ -36,6 +38,7 @@ class _HomePageState extends StateX<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(200), // Set this height
         child: Container(
@@ -130,6 +133,46 @@ class _HomePageState extends StateX<HomePage> {
           ),
         ),
       ),
+      body: DefaultTabController(length: 3,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 10,),
+          ButtonsTabBar(
+            contentPadding: EdgeInsets.all(10.0),
+            height: 50,
+            radius: 20.0,
+            backgroundColor: AppColors.themeColor,
+            unselectedBackgroundColor: Colors.grey[200],
+            unselectedLabelStyle: TextStyle(color: Colors.black),
+            labelStyle:
+            TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            tabs: [
+              Tab(
+                icon: Icon(Icons.directions_car),
+                text: "Buy",
+              ),
+              Tab(
+                icon: Icon(Icons.directions_transit),
+                text: "Home Service",
+              ),
+              Tab(
+                icon: Icon(Icons.directions_transit),
+                text: "Grocery",
+              ),
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              children: <Widget>[
+                BuyPage(con),
+                BuyPage(con),
+                BuyPage(con)
+              ],
+            ),
+          ),
+        ],
+      ),),
     );
   }
 

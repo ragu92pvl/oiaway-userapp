@@ -206,7 +206,7 @@ class _LocationPageState extends StateX<LocationPage>{
       });
       con.getZone(context, position.latitude.toString(), position.longitude.toString());
       PreferenceUtils.saveLatitude(position.latitude.toString());
-      PreferenceUtils.saveLatitude(position.longitude.toString());
+      PreferenceUtils.saveLongitude(position.longitude.toString());
       PreferenceUtils.saveLocation(_currentLocation);
     }).catchError((e) {
       debugPrint(e);

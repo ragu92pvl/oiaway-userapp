@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:state_extended/state_extended.dart';
 import 'package:userapp/model/response/home/home_data_response.dart';
 import 'package:userapp/model/response/login/login_response.dart';
+import 'package:userapp/model/response/product/product_response.dart';
+import 'package:userapp/model/response/product/sub_category_response.dart';
 import 'package:userapp/utils/validation_utils.dart';
 
 import '../network/api_service.dart';
@@ -25,6 +27,8 @@ class HomeController extends StateXController{
   String? deviceToken = "";
   var profileResponse = LoginResponse();
   var homeDataResponse = HomeDataResponse();
+  List<SubCategoryData> subCategoryList = [];
+  List<ProductData> productList = [];
 
   getDataInformation(BuildContext context)  async {
     address = await PreferenceUtils.getLocation();
@@ -55,6 +59,54 @@ class HomeController extends StateXController{
     apiService.getHomeData(lat!,lng!).then((value){
       Loader.hide();
       homeDataResponse = value;
+      notifyClients();
+    }).catchError((e){
+      Loader.hide();
+      print(e.toString());
+    });
+  }
+
+  getSubCategory(BuildContext context,String catId){
+    Loader.show();
+    apiService.getSubCategory(catId).then((value){
+      Loader.hide();
+      if(value.success!) {
+        subCategoryList = value.subCategoryData!;
+      }else{
+        ValidationUtils.showAppToast("No category found");
+      }
+      notifyClients();
+    }).catchError((e){
+      Loader.hide();
+      print(e.toString());
+    });
+  }
+
+  getProduct(BuildContext context,String catId,String subId){
+    Loader.show();
+    apiService.getProduct(catId,subId).then((value){
+      Loader.hide();
+      if(value.success!) {
+        productList = value.productData!;
+      }else{
+        ValidationUtils.showAppToast("No category found");
+      }
+      notifyClients();
+    }).catchError((e){
+      Loader.hide();
+      print(e.toString());
+    });
+  }
+
+  getAllCategory(BuildContext context,String catId){
+    Loader.show();
+    apiService.getSubCategory(catId).then((value){
+      Loader.hide();
+      if(value.success!) {
+        subCategoryList = value.subCategoryData!;
+      }else{
+        ValidationUtils.showAppToast("No category found");
+      }
       notifyClients();
     }).catchError((e){
       Loader.hide();

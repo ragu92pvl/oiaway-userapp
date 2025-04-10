@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:userapp/model/response/home/home_data_response.dart';
+import 'package:userapp/model/response/product/product_response.dart';
+import 'package:userapp/model/response/product/sub_category_response.dart';
+import 'package:userapp/pages/category/sub_category_page.dart';
 import 'package:userapp/pages/dashboard/dashboard_page.dart';
 import 'package:userapp/pages/location/location_page.dart';
 import 'package:userapp/pages/login/login_page.dart';
+import 'package:userapp/pages/product/product_details_page.dart';
+import 'package:userapp/pages/product/product_page.dart';
 import 'package:userapp/pages/register/register_page.dart';
 import 'package:userapp/pages/splash/splash_page.dart';
 
@@ -96,6 +102,37 @@ class _MyAppState extends State<MyApp> {
               },
             ),
           ),
+          GoRoute(
+            path: 'subcategory-page',
+            name: 'subcategory-page',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var categoryData = arguments['categoryData'] as CategoryData?;
+              return SubCategoryPage(categoryData!);
+            },
+          ),
+          GoRoute(
+            path: 'product-list',
+            name: 'product-list',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var categoryData = arguments['categoryData'] as CategoryData?;
+              var subCategoryData = arguments['subCategoryData'] as SubCategoryData?;
+              return ProductPage(categoryData!,subCategoryData!);
+            },
+          ),
+          GoRoute(
+            path: 'product-details-page',
+            name: 'product-details-page',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var categoryData = arguments['categoryData'] as CategoryData?;
+              var subCategoryData = arguments['subCategoryData'] as SubCategoryData?;
+              var productData = arguments['productData'] as ProductData?;
+              return ProductDetailsPage(categoryData!,subCategoryData!,productData);
+            },
+          ),
+
 
           // GoRoute(
           //   path: 'cart',

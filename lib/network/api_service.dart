@@ -5,9 +5,12 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:userapp/model/request/register/register_request.dart';
+import 'package:userapp/model/response/home/all_category_response.dart';
 import 'package:userapp/model/response/home/home_data_response.dart';
 import 'package:userapp/model/response/location/zone_response.dart';
 import 'package:userapp/model/response/login/login_response.dart';
+import 'package:userapp/model/response/product/product_response.dart';
+import 'package:userapp/model/response/product/sub_category_response.dart';
 import 'package:userapp/model/response/register/register_response.dart';
 import '../constants/api_constants.dart';
 import '../model/request/login/login_request.dart';
@@ -100,6 +103,63 @@ class ApiService {
           "${ApiConstants.homeData}/$lat/$lng/$userId");
       if (response.statusCode == 200) {
         return HomeDataResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<SubCategoryResponse> getSubCategory(String catId) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.listSubCategory}/$catId");
+      if (response.statusCode == 200) {
+        return SubCategoryResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<ProductResponse> getProduct(catId,subId) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.subCategoryByProduct}/$catId/$subId/$userId");
+      if (response.statusCode == 200) {
+        return ProductResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<AllCategoryResponse> getAllCategory(String catId) async {
+    try {
+      String? userId  = await PreferenceUtils.getZoneId();
+      final response = await dioClient.get(
+          "${ApiConstants.allCategoryService}/$catId");
+      if (response.statusCode == 200) {
+        return AllCategoryResponse.fromJson(response.data);
       } else {
         ValidationUtils.showAppToast(
             'Failed to sign in. Status code: ${response.statusCode}');
