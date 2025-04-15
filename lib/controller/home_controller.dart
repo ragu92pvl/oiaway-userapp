@@ -4,6 +4,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:state_extended/state_extended.dart';
+import 'package:userapp/model/response/home/all_category_response.dart';
 import 'package:userapp/model/response/home/home_data_response.dart';
 import 'package:userapp/model/response/login/login_response.dart';
 import 'package:userapp/model/response/product/product_response.dart';
@@ -27,6 +28,7 @@ class HomeController extends StateXController{
   String? deviceToken = "";
   var profileResponse = LoginResponse();
   var homeDataResponse = HomeDataResponse();
+  var allCategoryResponse = AllCategoryResponse();
   List<SubCategoryData> subCategoryList = [];
   List<ProductData> productList = [];
 
@@ -98,12 +100,12 @@ class HomeController extends StateXController{
     });
   }
 
-  getAllCategory(BuildContext context,String catId){
+  getAllCategory(BuildContext context){
     Loader.show();
-    apiService.getSubCategory(catId).then((value){
+    apiService.getAllCategory().then((value){
       Loader.hide();
       if(value.success!) {
-        subCategoryList = value.subCategoryData!;
+        allCategoryResponse = value;
       }else{
         ValidationUtils.showAppToast("No category found");
       }

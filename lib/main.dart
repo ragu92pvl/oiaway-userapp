@@ -11,6 +11,8 @@ import 'package:userapp/pages/location/location_page.dart';
 import 'package:userapp/pages/login/login_page.dart';
 import 'package:userapp/pages/product/product_details_page.dart';
 import 'package:userapp/pages/product/product_page.dart';
+import 'package:userapp/pages/records/add_records_page.dart';
+import 'package:userapp/pages/records/my_records_page.dart';
 import 'package:userapp/pages/register/register_page.dart';
 import 'package:userapp/pages/splash/splash_page.dart';
 
@@ -132,8 +134,20 @@ class _MyAppState extends State<MyApp> {
               return ProductDetailsPage(categoryData!,subCategoryData!,productData);
             },
           ),
-
-
+          GoRoute(
+            path: 'my-records-page',
+            name: 'my-records-page',
+            builder: (BuildContext context, GoRouterState state) {
+              return MyRecordsPage();
+            },
+          ),
+          GoRoute(
+            path: 'add-records-page',
+            name: 'add-records-page',
+            builder: (BuildContext context, GoRouterState state) {
+              return AddRecordsPage();
+            },
+          ),
           // GoRoute(
           //   path: 'cart',
           //   builder: (BuildContext context, GoRouterState state) {

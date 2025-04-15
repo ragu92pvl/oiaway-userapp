@@ -1,7 +1,9 @@
+import 'package:userapp/model/response/home/home_data_response.dart';
+
 class AllCategoryResponse {
   bool? success;
   int? errorCode;
-  List<ProductCategoryData>? productCategoryData;
+  List<CategoryData>? productCategoryData;
   List<ServiceCategoryData>? serviceCategoryData;
   String? message;
 
@@ -16,9 +18,9 @@ class AllCategoryResponse {
     success = json['success'];
     errorCode = json['errorCode'];
     if (json['productCategoryData'] != null) {
-      productCategoryData = <ProductCategoryData>[];
+      productCategoryData = <CategoryData>[];
       json['productCategoryData'].forEach((v) {
-        productCategoryData!.add(new ProductCategoryData.fromJson(v));
+        productCategoryData!.add(new CategoryData.fromJson(v));
       });
     }
     if (json['serviceCategoryData'] != null) {
@@ -47,46 +49,6 @@ class AllCategoryResponse {
   }
 }
 
-class ProductCategoryData {
-  String? id;
-  String? catSubtitle;
-  String? catName;
-  String? catImage;
-  String? catStatus;
-  String? catVideo;
-  String? cityId;
-
-  ProductCategoryData(
-      {this.id,
-        this.catSubtitle,
-        this.catName,
-        this.catImage,
-        this.catStatus,
-        this.catVideo,
-        this.cityId});
-
-  ProductCategoryData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    catSubtitle = json['catSubtitle'];
-    catName = json['catName'];
-    catImage = json['catImage'];
-    catStatus = json['catStatus'];
-    catVideo = json['catVideo'];
-    cityId = json['cityId'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['catSubtitle'] = this.catSubtitle;
-    data['catName'] = this.catName;
-    data['catImage'] = this.catImage;
-    data['catStatus'] = this.catStatus;
-    data['catVideo'] = this.catVideo;
-    data['cityId'] = this.cityId;
-    return data;
-  }
-}
 
 class ServiceCategoryData {
   String? id;

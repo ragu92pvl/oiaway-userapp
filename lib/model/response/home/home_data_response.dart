@@ -100,7 +100,7 @@ class CategoryData {
   String? catImage;
   String? catStatus;
   String? catVideo;
-  Null? cityId;
+  String? cityId;
 
   CategoryData(
       {this.id,

@@ -1,6 +1,7 @@
 
 
 
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -256,79 +257,69 @@ class _ProductDetailsPageState extends StateX<ProductDetailsPage> {
                 ),
               ),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: DefaultTabController(
-                    length: 3,
-                    initialIndex: 0,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TabBar(
-                          isScrollable: true,
-                          labelColor: Color(0xFF1B74E4),
-                          labelStyle: AppStyle.fontSarabunMedium,
-                          indicatorColor: Color(0xFF1B74E4),
-                          tabs: [
-                            Row(
-                              children: [
-                                Tab(
-                                  text: "Specifications",
+                child: DefaultTabController(length: 3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10,),
+                      ButtonsTabBar(
+                        contentPadding: EdgeInsets.all(10.0),
+                        height: 50,
+                        radius: 20.0,
+                        backgroundColor: AppColors.themeColor,
+                        unselectedBackgroundColor: Colors.grey[200],
+                        unselectedLabelStyle: TextStyle(color: Colors.black),
+                        labelStyle:
+                        TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        tabs: [
+                          Tab(
+                            icon: Icon(Icons.directions_car),
+                            text: "Specifications",
+                          ),
+                          Tab(
+                            icon: Icon(Icons.directions_transit),
+                            text: "Description",
+                          ),
+                          Tab(
+                            icon: Icon(Icons.directions_transit),
+                            text: "Reviews",
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: TabBarView(
+                          children: <Widget>[
+                            Padding(
+                              padding:
+                              EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                              child: SingleChildScrollView(
+                                child: Html(
+                                  data: widget.productData!.productSpec!,
                                 ),
-                              ],
+                              ),
                             ),
-                            Row(
-                              children: [
-                                Tab(
-                                  text: "Description",
+                            Padding(
+                              padding:
+                              EdgeInsetsDirectional.fromSTEB(10, 10, 10,10),
+                              child: SingleChildScrollView(
+                                child: Html(
+                                  data: widget.productData!.productDesc!,
                                 ),
-                              ],
+                              ),
                             ),
-                            Row(
-                              children: [
-                                Tab(
-                                  text: "Reviews",
-                                ),
-                              ],
-                            ),
+                            SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  //ProductReviewPage(widget.productData.id!),
+                                  Container()
+                                ],
+                              ),
+                            )
                           ],
                         ),
-                        Expanded(
-                          child: TabBarView(
-                            children: [
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-                                child: SingleChildScrollView(
-                                  child: Html(
-                                    data: widget.productData!.productSpec!,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(10, 10, 10,10),
-                                child: SingleChildScrollView(
-                                  child: Html(
-                                    data: widget.productData!.productDesc!,
-                                  ),
-                                ),
-                              ),
-                              SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    //ProductReviewPage(widget.productData.id!),
-                                    Container()
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
+                    ],
+                  ),),
               ),
             ],
           ),

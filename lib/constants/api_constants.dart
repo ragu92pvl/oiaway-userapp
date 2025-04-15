@@ -5,6 +5,9 @@ class ApiConstants{
   static var WEB_URL = "https://service.oiaway.com/";
   static var IMG_BASE_URL = "https://service.oiaway.com/";
   static var currency = "₹";
+  static var PATIENT = "Patient";
+  static var CAR = "Car";
+  static var ACCESSORIES = "Accessories";
   static  String login_url = BASE_URL+"login";
   static String register = BASE_URL+"register";
   static String homeData = BASE_URL+"homeData";
@@ -33,5 +36,9 @@ class ApiConstants{
   static String forget = BASE_URL+"forget";
   static String updateProfile = BASE_URL+"updateProfile";
   static String notificationAll = BASE_URL+"notificationAll";
+  static String listRecords = BASE_URL+"listrecords";
+  static String addrecords = BASE_URL+"addrecords";
+  static String deleterecords = BASE_URL+"deleterecords";
+  static String updaterecord = BASE_URL+"updaterecord";
 
 }
