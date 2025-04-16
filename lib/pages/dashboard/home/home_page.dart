@@ -1,11 +1,14 @@
 
 
+import 'dart:developer';
+
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:state_extended/state_extended.dart';
 import 'package:userapp/controller/home_controller.dart';
 import 'package:userapp/flutter_flow/flutter_flow_theme.dart';
 import 'package:userapp/pages/dashboard/home/buy_page.dart';
+import 'package:userapp/pages/dashboard/service/service_page.dart';
 import 'package:userapp/utils/preference_utils.dart';
 
 import '../../../constants/app_colors.dart';
@@ -149,15 +152,15 @@ class _HomePageState extends StateX<HomePage> {
             TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             tabs: [
               Tab(
-                icon: Icon(Icons.directions_car),
-                text: "Buy",
+                icon: Icon(Icons.laptop),
+                text: "Buy/Enquiry",
               ),
               Tab(
-                icon: Icon(Icons.directions_transit),
+                icon: Icon(Icons.miscellaneous_services),
                 text: "Home Service",
               ),
               Tab(
-                icon: Icon(Icons.directions_transit),
+                icon: Icon(Icons.store),
                 text: "Grocery",
               ),
             ],
@@ -166,7 +169,7 @@ class _HomePageState extends StateX<HomePage> {
             child: TabBarView(
               children: <Widget>[
                 BuyPage(con),
-                BuyPage(con),
+                ServicePage(),
                 BuyPage(con)
               ],
             ),
