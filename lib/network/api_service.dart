@@ -15,6 +15,7 @@ import 'package:userapp/model/response/product/sub_category_response.dart';
 import 'package:userapp/model/response/records/records_data_response.dart';
 import 'package:userapp/model/response/register/register_response.dart';
 import 'package:userapp/model/response/service/service_category_response.dart';
+import 'package:userapp/model/response/service/service_package_response.dart';
 import '../constants/api_constants.dart';
 import '../model/request/login/login_request.dart';
 import '../utils/preference_utils.dart';
@@ -242,6 +243,25 @@ class ApiService {
           "${ApiConstants.homeServiceData}/$cityId");
       if (response.statusCode == 200) {
         return ServiceCategoryResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<ServicePackageResponse> getServicePackages(String serviceId) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.listPackages}/$serviceId");
+      if (response.statusCode == 200) {
+        return ServicePackageResponse.fromJson(response.data);
       } else {
         ValidationUtils.showAppToast(
             'Failed to sign in. Status code: ${response.statusCode}');

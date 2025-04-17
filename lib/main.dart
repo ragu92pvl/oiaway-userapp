@@ -14,6 +14,7 @@ import 'package:userapp/pages/product/product_page.dart';
 import 'package:userapp/pages/records/add_records_page.dart';
 import 'package:userapp/pages/records/my_records_page.dart';
 import 'package:userapp/pages/register/register_page.dart';
+import 'package:userapp/pages/service/service_list_packages_page.dart';
 import 'package:userapp/pages/splash/splash_page.dart';
 
 import 'constants/app_colors.dart';
@@ -146,6 +147,15 @@ class _MyAppState extends State<MyApp> {
             name: 'add-records-page',
             builder: (BuildContext context, GoRouterState state) {
               return AddRecordsPage();
+            },
+          ),
+          GoRoute(
+            path: 'service-list-packages-page',
+            name: 'service-list-packages-page',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var categoryData = arguments['categoryData'];
+              return ServiceListPackagesPage(categoryData);
             },
           ),
           // GoRoute(

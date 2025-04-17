@@ -97,12 +97,12 @@ class _ServicePageState extends StateX<ServicePage> {
                           padding: const EdgeInsets.all(8.0),
                           child: InkWell(
                             onTap: () {
-                              // context.pushNamed(
-                              //   'subcategory-page',
-                              //   extra: {
-                              //     'categoryData': categoryData,
-                              //   },
-                              // );
+                              context.pushNamed(
+                                'service-list-packages-page',
+                                extra: {
+                                  'categoryData': categoryData,
+                                },
+                              );
                             },
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
