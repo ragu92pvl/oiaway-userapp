@@ -5,16 +5,20 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:userapp/model/response/home/home_data_response.dart';
 import 'package:userapp/model/response/product/product_response.dart';
 import 'package:userapp/model/response/product/sub_category_response.dart';
+import 'package:userapp/pages/address/add_address_page.dart';
+import 'package:userapp/pages/address/address_page.dart';
 import 'package:userapp/pages/category/sub_category_page.dart';
 import 'package:userapp/pages/dashboard/dashboard_page.dart';
 import 'package:userapp/pages/location/location_page.dart';
 import 'package:userapp/pages/login/login_page.dart';
+import 'package:userapp/pages/packages/packages_list_page.dart';
 import 'package:userapp/pages/product/product_details_page.dart';
 import 'package:userapp/pages/product/product_page.dart';
 import 'package:userapp/pages/records/add_records_page.dart';
 import 'package:userapp/pages/records/my_records_page.dart';
 import 'package:userapp/pages/register/register_page.dart';
 import 'package:userapp/pages/service/service_list_packages_page.dart';
+import 'package:userapp/pages/service/service_package_details_page.dart';
 import 'package:userapp/pages/splash/splash_page.dart';
 
 import 'constants/app_colors.dart';
@@ -156,6 +160,38 @@ class _MyAppState extends State<MyApp> {
               final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
               var categoryData = arguments['categoryData'];
               return ServiceListPackagesPage(categoryData);
+            },
+          ),
+          GoRoute(
+            path: 'service-packages-details-page',
+            name: 'service-packages-details-page',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var serviceData = arguments['serviceData'];
+              return ServicePackageDetailsPage(serviceData);
+            },
+          ),
+          GoRoute(
+            path: 'address-page',
+            name: 'address-page',
+            builder: (BuildContext context, GoRouterState state) {
+              return AddressPage();
+            },
+          ),
+          GoRoute(
+            path: 'add-address-page',
+            name: 'add-address-page',
+            builder: (BuildContext context, GoRouterState state) {
+              return AddAddressPage();
+            },
+          ),
+          GoRoute(
+            path: 'amc-packages',
+            name: 'amc-packages',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var products = arguments['products'];
+              return PackagesListPage(products);
             },
           ),
           // GoRoute(

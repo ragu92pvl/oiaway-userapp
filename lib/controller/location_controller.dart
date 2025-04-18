@@ -18,8 +18,12 @@ class LocationController extends StateXController{
     Loader.show();
     apiService.getZone(lat, lng).then((value){
       Loader.hide();
-      PreferenceUtils.saveZoneId(value.data!);
-      context.go('/dashboard-page');
+      if(value.data == "no_matched"){
+
+      }else {
+        PreferenceUtils.saveZoneId(value.data!);
+        context.go('/dashboard-page');
+      }
     }).catchError((e){
       Loader.hide();
       print(e.toString());

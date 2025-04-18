@@ -4,7 +4,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:userapp/model/request/address/add_address_request.dart';
 import 'package:userapp/model/request/register/register_request.dart';
+import 'package:userapp/model/response/address/address_response.dart';
 import 'package:userapp/model/response/common/common_response.dart';
 import 'package:userapp/model/response/home/all_category_response.dart';
 import 'package:userapp/model/response/home/home_data_response.dart';
@@ -18,6 +20,8 @@ import 'package:userapp/model/response/service/service_category_response.dart';
 import 'package:userapp/model/response/service/service_package_response.dart';
 import '../constants/api_constants.dart';
 import '../model/request/login/login_request.dart';
+import '../model/response/packages/amc_packages_response.dart';
+import '../model/response/product/amc_products_response.dart';
 import '../utils/preference_utils.dart';
 import '../utils/time_utils.dart';
 import '../utils/validation_utils.dart';
@@ -274,7 +278,101 @@ class ApiService {
     }
   }
 
+  Future<AddressResponse> getAddress() async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.listAddress}/$userId");
+      if (response.statusCode == 200) {
+        return AddressResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
 
+  Future<CommonResponse> addAddress(AddAddressRequest addressRequest) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      addressRequest.uid = userId;
+      final response = await dioClient.post(
+          "${ApiConstants.addAddress}",addressRequest.toJson());
+      if (response.statusCode == 200) {
+        return CommonResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<CommonResponse> deleteAddress(String addressId) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.deleteAddress}/$addressId");
+      if (response.statusCode == 200) {
+        return CommonResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<AmcProductsResponse> getAmcProducts() async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.listamcproducts}/$userId");
+      if (response.statusCode == 200) {
+        return AmcProductsResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<AmcPackageResponse> getAmcPackages(amcProductId) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.listamcpackages}/$amcProductId");
+      if (response.statusCode == 200) {
+        return AmcPackageResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
 
   final apiServiceProvider = Provider<ApiService>((ref) => ApiService());
 

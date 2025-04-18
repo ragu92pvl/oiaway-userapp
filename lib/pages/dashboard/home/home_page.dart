@@ -4,6 +4,7 @@ import 'dart:developer';
 
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:state_extended/state_extended.dart';
 import 'package:userapp/controller/home_controller.dart';
 import 'package:userapp/flutter_flow/flutter_flow_theme.dart';
@@ -73,7 +74,7 @@ class _HomePageState extends StateX<HomePage> {
                     children: [
                       InkWell(
                         onTap: () async {
-
+                          context.pushNamed('address-page');
                         },
                         child: Container(
                           padding: EdgeInsets.all(8),

@@ -39,6 +39,8 @@ class RecordsData {
   String? description;
   String? datajson;
   String? image;
+  String? amc;
+  String? amcProductId;
 
   RecordsData(
       {this.id,
@@ -46,7 +48,7 @@ class RecordsData {
         this.recordType,
         this.title,
         this.description,
-        this.datajson,this.image});
+        this.datajson,this.image,this.amcProductId,this.amc});
 
   RecordsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -55,6 +57,8 @@ class RecordsData {
     title = json['title'];
     description = json['description'];
     datajson = json['datajson'];
+    amcProductId = json['amc_product_id'];
+    amc = json['amc'];
     image = json['image'];
   }
 
@@ -66,6 +70,7 @@ class RecordsData {
     data['title'] = this.title;
     data['description'] = this.description;
     data['datajson'] = this.datajson;
+    data['amc_product_id'] = this.amcProductId;
     data['image'] = this.image;
     return data;
   }

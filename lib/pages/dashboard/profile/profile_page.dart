@@ -106,7 +106,7 @@ class _ProfilePageState extends StateX<ProfilePage> {
           }else if(title == "My Enquiry"){
 
           }else if(title == "My Address"){
-
+              context.pushNamed('address-page');
           }else if(title == "Setting"){
 
           }else if(title == "Log Out"){

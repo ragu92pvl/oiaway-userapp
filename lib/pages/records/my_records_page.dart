@@ -70,65 +70,90 @@ class _MyRecordsPageState extends StateX<MyRecordsPage> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   child: Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Row(
+                    child: Column(
                       children: [
-                        // AC Image
-                        if(records.recordType == ApiConstants.PATIENT)
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset("assets/images/patient.png",height: 90,width: 90,),
-                          ),
-                        if(records.recordType == ApiConstants.CAR)
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset("assets/images/car.png",height: 90,width: 90,),
-                          ),
-                        if(records.recordType == ApiConstants.ACCESSORIES)
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset("assets/images/accessories.png",height: 90,width: 90,),
-                          ),
-                        const SizedBox(width: 12),
-                        // AC Details
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(records.title!,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  )),
-                              const SizedBox(height: 4),
-                              Text(records.description!,
-                                  style: const TextStyle(
-                                    color: Colors.black54,
-                                  )),
-                              const SizedBox(height: 4),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: Text(
-                                  records.recordType!,
-                                  style: const TextStyle(fontWeight: FontWeight.w500),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Column(
+                        Row(
                           children: [
-                            Icon(Icons.edit,color: Colors.green,),
-                            SizedBox(height: 15,),
-                            InkWell(
-                                child: Icon(Icons.delete,color: Colors.red,),
-                            onTap: (){
-                                  con.deleteRecords(context, records.id!);
-                            },)
+                            // AC Image
+                            if(records.recordType == ApiConstants.PATIENT)
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset("assets/images/patient.png",height: 90,width: 90,),
+                              ),
+                            if(records.recordType == ApiConstants.CAR)
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset("assets/images/car.png",height: 90,width: 90,),
+                              ),
+                            if(records.recordType == ApiConstants.ACCESSORIES)
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset("assets/images/accessories.png",height: 90,width: 90,),
+                              ),
+                            const SizedBox(width: 12),
+                            // AC Details
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(records.title!,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      )),
+                                  const SizedBox(height: 4),
+                                  Text(records.description!,
+                                      style: const TextStyle(
+                                        color: Colors.black54,
+                                      )),
+                                  const SizedBox(height: 4),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.shade200,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      records.recordType!,
+                                      style: const TextStyle(fontWeight: FontWeight.w500),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                Icon(Icons.edit,color: Colors.green,),
+                                SizedBox(height: 15,),
+                                InkWell(
+                                    child: Icon(Icons.delete,color: Colors.red,),
+                                onTap: (){
+                                      con.deleteRecords(context, records.id!);
+                                },)
+                              ],
+                            )
                           ],
+                        ),
+                        if(records.amcProductId!="2" && records.amc=="0")
+                        InkWell(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              "Create Amc +",
+                              style: AppStyle.fontSarabunMedium.override(fontSize: 12,color: Colors.white),
+                              textAlign: TextAlign.center,
+                            ),
+                            width: double.infinity,
+                          ),
+                          onTap: (){
+                            context.pushNamed('amc-packages',extra: {
+                              'products':records
+                            });
+                          },
                         )
                       ],
                     ),

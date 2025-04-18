@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:state_extended/state_extended.dart';
 import 'package:userapp/constants/api_constants.dart';
 import 'package:userapp/controller/service_controller.dart';
@@ -57,73 +58,123 @@ class _ServiceListPackagesPageState extends StateX<ServiceListPackagesPage> {
           SizedBox(height: 10,),
           Expanded(
             child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               itemCount: con.packageList.length,
               padding: const EdgeInsets.all(12),
               itemBuilder: (context, index) {
                 final service = con.packageList[index];
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  margin: const EdgeInsets.symmetric(vertical: 8),
-                  elevation: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            ApiConstants.IMG_BASE_URL+"/"+service.image!,
-                            width: 70,
-                            height: 70,
-                            fit: BoxFit.cover,
+                var highLightsArray = service.specification?.split(",");
+                return InkWell(
+                  onTap: (){
+                    context.pushNamed('service-packages-details-page',extra: {
+                      "serviceData":service
+                    });
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    elevation: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              ApiConstants.IMG_BASE_URL+"/"+service.image!,
+                              width: 70,
+                              height: 70,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                service.title!,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  service.title!,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 4),
-                              const Row(
-                                children: [
-                                  Icon(Icons.star_border, size: 16, color: Colors.grey),
-                                  Icon(Icons.star_border, size: 16, color: Colors.grey),
-                                  Icon(Icons.star_border, size: 16, color: Colors.grey),
-                                  Icon(Icons.star_border, size: 16, color: Colors.grey),
-                                  Icon(Icons.star_border, size: 16, color: Colors.grey),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                service.packagePrice!,
-                                style: const TextStyle(fontWeight: FontWeight.w500),
-                              ),
-                              const SizedBox(height: 4),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(6),
+                                const SizedBox(height: 4),
+                                const Row(
+                                  children: [
+                                    Icon(Icons.star_border, size: 16, color: Colors.orange),
+                                    Icon(Icons.star_border, size: 16, color: Colors.orange),
+                                    Icon(Icons.star_border, size: 16, color: Colors.orange),
+                                    Icon(Icons.star_border, size: 16, color: Colors.orange),
+                                    Icon(Icons.star_border, size: 16, color: Colors.grey),
+                                  ],
                                 ),
-                                child: const Text(
-                                  "For Our Customer",
-                                  style: TextStyle(fontSize: 12, color: Colors.black87),
+                                const SizedBox(height: 4),
+                                Text(
+                                  ApiConstants.currency+service.packagePrice!,
+                                  style: const TextStyle(fontWeight: FontWeight.w500),
                                 ),
-                              )
-                            ],
+                                const SizedBox(height: 4),
+                                GridView.builder(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
+                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      crossAxisSpacing: 2,
+                                      mainAxisSpacing: 2,
+                                      childAspectRatio: 3,
+                                    ),
+                                    scrollDirection: Axis.vertical,
+                                    itemCount:
+                                    highLightsArray!.length,
+                                    itemBuilder: (BuildContext ctx, index) {
+                                      return Container(
+                                        height: 30,
+                                        child: Padding(
+                                          padding:
+                                          EdgeInsetsDirectional
+                                              .fromSTEB(
+                                              0, 5, 0, 0),
+                                          child: Container(
+                                            decoration:
+                                            BoxDecoration(
+                                              color: Color(
+                                                  0xFFF9F4F4),
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  5),
+                                              shape: BoxShape
+                                                  .rectangle,
+                                            ),
+                                            child: Column(
+                                              mainAxisSize:MainAxisSize.min,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .center,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(2.0),
+                                                  child: Text(
+                                                    highLightsArray[index],
+                                                    style: AppStyle.fontSarabunMedium.override(fontSize: 8,color: Colors.grey),
+                                                  ),
+                                                )],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
