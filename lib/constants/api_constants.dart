@@ -42,5 +42,6 @@ class ApiConstants{
   static String updaterecord = BASE_URL+"updaterecord";
   static String listamcproducts = BASE_URL+"listamcproducts";
   static String listamcpackages = BASE_URL+"listamcpackages";
+  static String updateamcproduct = BASE_URL+"updateamcproduct";
 
 }

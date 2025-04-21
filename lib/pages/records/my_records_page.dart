@@ -152,8 +152,29 @@ class _MyRecordsPageState extends StateX<MyRecordsPage> {
                           onTap: (){
                             context.pushNamed('amc-packages',extra: {
                               'products':records
+                            }).then((e){
+                              con.getRecords(context);
                             });
                           },
+                        ),
+                        if(records.amcProductId!="2" && records.amc=="1")
+                        Align(
+
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "View Amc Details",
+                                style: AppStyle.fontSarabunMedium.override(fontSize: 12,color: Colors.white),
+                              ),
+                            ),
+                            width: 120,
+                          ),
+                          alignment: Alignment.bottomRight,
                         )
                       ],
                     ),

@@ -11,6 +11,7 @@ import 'package:userapp/pages/category/sub_category_page.dart';
 import 'package:userapp/pages/dashboard/dashboard_page.dart';
 import 'package:userapp/pages/location/location_page.dart';
 import 'package:userapp/pages/login/login_page.dart';
+import 'package:userapp/pages/notifications/notification_page.dart';
 import 'package:userapp/pages/packages/packages_list_page.dart';
 import 'package:userapp/pages/product/product_details_page.dart';
 import 'package:userapp/pages/product/product_page.dart';
@@ -20,6 +21,7 @@ import 'package:userapp/pages/register/register_page.dart';
 import 'package:userapp/pages/service/service_list_packages_page.dart';
 import 'package:userapp/pages/service/service_package_details_page.dart';
 import 'package:userapp/pages/splash/splash_page.dart';
+import 'package:userapp/pages/success/package_payment_success_page.dart';
 
 import 'constants/app_colors.dart';
 import 'constants/app_style.dart';
@@ -192,6 +194,20 @@ class _MyAppState extends State<MyApp> {
               final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
               var products = arguments['products'];
               return PackagesListPage(products);
+            },
+          ),
+          GoRoute(
+            path: 'notifications-page',
+            name: 'notifications-page',
+            builder: (BuildContext context, GoRouterState state) {
+              return NotificationPage();
+            },
+          ),
+          GoRoute(
+            path: 'package-payment-success',
+            name: 'package-payment-success',
+            builder: (BuildContext context, GoRouterState state) {
+              return PackagePaymentSuccessPage();
             },
           ),
           // GoRoute(

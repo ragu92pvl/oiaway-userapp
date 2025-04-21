@@ -12,6 +12,7 @@ import 'package:userapp/model/response/home/all_category_response.dart';
 import 'package:userapp/model/response/home/home_data_response.dart';
 import 'package:userapp/model/response/location/zone_response.dart';
 import 'package:userapp/model/response/login/login_response.dart';
+import 'package:userapp/model/response/notifications/notification_response.dart';
 import 'package:userapp/model/response/product/product_response.dart';
 import 'package:userapp/model/response/product/sub_category_response.dart';
 import 'package:userapp/model/response/records/records_data_response.dart';
@@ -362,6 +363,44 @@ class ApiService {
           "${ApiConstants.listamcpackages}/$amcProductId");
       if (response.statusCode == 200) {
         return AmcPackageResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<NotificationResponse> getNotifications() async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.notificationAll}/$userId");
+      if (response.statusCode == 200) {
+        return NotificationResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<CommonResponse> updateAmcProducts(String id,String packageId) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.updateamcproduct}/$id/$packageId");
+      if (response.statusCode == 200) {
+        return CommonResponse.fromJson(response.data);
       } else {
         ValidationUtils.showAppToast(
             'Failed to sign in. Status code: ${response.statusCode}');

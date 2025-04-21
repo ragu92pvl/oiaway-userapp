@@ -104,5 +104,22 @@ class RecordsController extends StateXController{
     });
   }
 
+  updateAmcProducts(BuildContext context, RecordsData recordsData) async {
+    Loader.show();
+
+    await apiService.updateAmcProducts(recordsData.id!,recordsData.amcProductId!).then((value){
+      Loader.hide();
+      if(value.success!){
+       context.pop();
+       context.pushNamed('package-payment-success');
+      }
+      notifyClients();
+    }).catchError((e){
+      Loader.hide();
+      print(e.toString());
+    });
+  }
+
+
 
 }

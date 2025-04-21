@@ -109,7 +109,11 @@ class _HomePageState extends StateX<HomePage> {
                           ),
                         ),
                       ),
-                      Image.asset("assets/images/home-notification.png",height: 40,width: 40,color: Colors.white,),
+                      InkWell(
+                          onTap: (){
+                            context.pushNamed('notifications-page');
+                          },
+                          child: Image.asset("assets/images/home-notification.png",height: 40,width: 40,color: Colors.white,)),
                     ],
                   ),
                   SizedBox(height: 10,),
