@@ -5,24 +5,32 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:userapp/model/request/address/add_address_request.dart';
+import 'package:userapp/model/request/order/order_request.dart';
 import 'package:userapp/model/request/register/register_request.dart';
+import 'package:userapp/model/request/service/service_request.dart';
 import 'package:userapp/model/response/address/address_response.dart';
 import 'package:userapp/model/response/common/common_response.dart';
+import 'package:userapp/model/response/grocery/grocery_data_response.dart';
 import 'package:userapp/model/response/home/all_category_response.dart';
 import 'package:userapp/model/response/home/home_data_response.dart';
 import 'package:userapp/model/response/location/zone_response.dart';
 import 'package:userapp/model/response/login/login_response.dart';
 import 'package:userapp/model/response/notifications/notification_response.dart';
+import 'package:userapp/model/response/order/order_response.dart';
 import 'package:userapp/model/response/product/product_response.dart';
 import 'package:userapp/model/response/product/sub_category_response.dart';
 import 'package:userapp/model/response/records/records_data_response.dart';
 import 'package:userapp/model/response/register/register_response.dart';
+import 'package:userapp/model/response/service/my_service_response.dart';
 import 'package:userapp/model/response/service/service_category_response.dart';
+import 'package:userapp/model/response/service/service_details_response.dart';
 import 'package:userapp/model/response/service/service_package_response.dart';
 import '../constants/api_constants.dart';
 import '../model/request/login/login_request.dart';
+import '../model/response/grocery/grocery_product_response.dart';
 import '../model/response/packages/amc_packages_response.dart';
 import '../model/response/product/amc_products_response.dart';
+import '../model/response/product/product_offer_response.dart';
 import '../utils/preference_utils.dart';
 import '../utils/time_utils.dart';
 import '../utils/validation_utils.dart';
@@ -412,6 +420,161 @@ class ApiService {
       throw e;
     }
   }
+
+  Future<CommonResponse> createService(ServiceRequest serviceRequest) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      serviceRequest.uid = userId;
+      final response = await dioClient.post(
+          "${ApiConstants.serviceRequest}",serviceRequest.toJson());
+      if (response.statusCode == 200) {
+        return CommonResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<MyServiceResponse> getMyServices() async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.listMyServices}/$userId");
+      if (response.statusCode == 200) {
+        return MyServiceResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<ServiceDetailsResponse> serviceDetails(String serviceId) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.serviceDetails}/$serviceId");
+      if (response.statusCode == 200) {
+        return ServiceDetailsResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<ProductOfferResponse> getProductOffers(String productId) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.listproductoffers}/$productId");
+      if (response.statusCode == 200) {
+        return ProductOfferResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<CommonResponse> createOrder(OrderRequest orderRequest) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      orderRequest.uid = userId;
+      final response = await dioClient.post(
+          "${ApiConstants.placeproductorder}",orderRequest.toJson());
+      if (response.statusCode == 200) {
+        return CommonResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<OrderResponse> getMyOrders() async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.listproductorders}/$userId");
+      if (response.statusCode == 200) {
+        return OrderResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<GroceryDataResponse> getGroceryData(String cityId) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.groceryData}/$cityId");
+      if (response.statusCode == 200) {
+        return GroceryDataResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<GroceryProductResponse> getGroceryProduct(String catId) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.get(
+          "${ApiConstants.listgroceryproducts}/$catId");
+      if (response.statusCode == 200) {
+        return GroceryProductResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
 
   final apiServiceProvider = Provider<ApiService>((ref) => ApiService());
 

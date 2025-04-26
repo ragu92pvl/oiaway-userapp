@@ -32,6 +32,7 @@ class ServicePackageResponse {
 }
 
 class PackageData {
+  String? id;
   String? servicePackageId;
   String? serviceCategoryId;
   String? title;
@@ -57,7 +58,7 @@ class PackageData {
         this.cityId,
         this.gallery,
         this.subPackages,
-        this.status});
+        this.status,this.id});
 
   PackageData.fromJson(Map<String, dynamic> json) {
     servicePackageId = json['servicePackageId'];
@@ -79,6 +80,7 @@ class PackageData {
         ? new SubPackages.fromJson(json['subPackages'])
         : null;
     status = json['status'];
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {

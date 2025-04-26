@@ -10,6 +10,7 @@ import 'package:userapp/pages/dashboard/category/category_page.dart';
 import 'package:userapp/pages/dashboard/home/home_page.dart';
 import 'package:userapp/pages/dashboard/orders/order_page.dart';
 import 'package:userapp/pages/dashboard/profile/profile_page.dart';
+import 'package:userapp/pages/dashboard/service/my_service_page.dart';
 import 'package:userapp/pages/dashboard/service/service_page.dart';
 
 import '../../constants/app_colors.dart';
@@ -31,7 +32,7 @@ class _DashboardPageState extends StateX<DashboardPage> {
     HomePage(),
     AllCategoryPage(),
     OrderPage(),
-    ServicePage(),
+    MyServicePage(),
     ProfilePage(),
   ];
 

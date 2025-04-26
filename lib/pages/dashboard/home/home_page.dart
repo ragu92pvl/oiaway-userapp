@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:state_extended/state_extended.dart';
 import 'package:userapp/controller/home_controller.dart';
 import 'package:userapp/flutter_flow/flutter_flow_theme.dart';
+import 'package:userapp/pages/dashboard/grocery/grocery_page.dart';
 import 'package:userapp/pages/dashboard/home/buy_page.dart';
 import 'package:userapp/pages/dashboard/service/service_page.dart';
 import 'package:userapp/utils/preference_utils.dart';
@@ -175,7 +176,7 @@ class _HomePageState extends StateX<HomePage> {
               children: <Widget>[
                 BuyPage(con),
                 ServicePage(),
-                BuyPage(con)
+                GroceryPage()
               ],
             ),
           ),

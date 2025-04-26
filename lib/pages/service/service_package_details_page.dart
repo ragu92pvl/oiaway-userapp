@@ -8,6 +8,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:userapp/flutter_flow/flutter_flow_theme.dart';
 import 'package:userapp/model/response/service/service_package_response.dart';
 
@@ -269,7 +270,9 @@ class _ServicePackageDetailsPageState extends State<ServicePackageDetailsPage> {
                 right: 10,
                 child: InkWell(
                   onTap: (){
-
+                      context.pushNamed('service-check-out-page',extra: {
+                        "packageData":widget.packageData
+                      });
                   },
                   child: Container(
                     width: double.infinity,

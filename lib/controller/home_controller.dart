@@ -4,14 +4,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:state_extended/state_extended.dart';
+import 'package:userapp/model/request/order/order_request.dart';
 import 'package:userapp/model/response/home/all_category_response.dart';
 import 'package:userapp/model/response/home/home_data_response.dart';
 import 'package:userapp/model/response/login/login_response.dart';
 import 'package:userapp/model/response/notifications/notification_response.dart';
+import 'package:userapp/model/response/product/product_offer_response.dart';
 import 'package:userapp/model/response/product/product_response.dart';
 import 'package:userapp/model/response/product/sub_category_response.dart';
 import 'package:userapp/utils/validation_utils.dart';
 
+import '../model/response/order/order_response.dart';
 import '../network/api_service.dart';
 import '../utils/loader.dart';
 import '../utils/preference_utils.dart';
@@ -30,9 +33,13 @@ class HomeController extends StateXController{
   var profileResponse = LoginResponse();
   var homeDataResponse = HomeDataResponse();
   var allCategoryResponse = AllCategoryResponse();
+  var orderRequest = OrderRequest();
   List<SubCategoryData> subCategoryList = [];
   List<NotificationData> notificationsList = [];
+  List<ProductOffersData> productOfferList = [];
+  List<OverallOrderDetails> orderList = [];
   List<ProductData> productList = [];
+
 
   getDataInformation(BuildContext context)  async {
     address = await PreferenceUtils.getLocation();
@@ -126,6 +133,48 @@ class HomeController extends StateXController{
         notificationsList = value.notificationData!;
       }else{
         ValidationUtils.showAppToast("No category found");
+      }
+      notifyClients();
+    }).catchError((e){
+      Loader.hide();
+      print(e.toString());
+    });
+  }
+
+  getProductsOffers(BuildContext context,String productId){
+    Loader.show();
+    apiService.getProductOffers(productId).then((value){
+      Loader.hide();
+      if(value.success!) {
+        productOfferList = value.productoffersData!;
+      }
+      notifyClients();
+    }).catchError((e){
+      Loader.hide();
+      print(e.toString());
+    });
+  }
+
+  createOrder(BuildContext context){
+    Loader.show();
+    apiService.createOrder(orderRequest).then((value){
+      Loader.hide();
+      if(value.success!) {
+        context.pushNamed('product-success-page');
+      }
+      notifyClients();
+    }).catchError((e){
+      Loader.hide();
+      print(e.toString());
+    });
+  }
+
+  getMyOrders(BuildContext context){
+    Loader.show();
+    apiService.getMyOrders().then((value){
+      Loader.hide();
+      if(value.success!) {
+        orderList = value.overallorderdetails!;
       }
       notifyClients();
     }).catchError((e){

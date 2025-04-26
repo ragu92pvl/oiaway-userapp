@@ -63,60 +63,65 @@ class _AddressPageState extends StateX<AddressPage> {
                   itemCount: con.addressList.length,
                   itemBuilder: (context,index){
                     var records = con.addressList[index];
-                    return Card(
-                      elevation: 2,
-                      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          children: [
-                            // AC Image
-                            // AC Details
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey.shade200,
-                                      borderRadius: BorderRadius.circular(6),
+                    return InkWell(
+                      onTap: (){
+                        context.pop(records);
+                      },
+                      child: Card(
+                        elevation: 2,
+                        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            children: [
+                              // AC Image
+                              // AC Details
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade200,
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                      child: Text(
+                                        records.type!,
+                                        style: const TextStyle(fontWeight: FontWeight.w500),
+                                      ),
                                     ),
-                                    child: Text(
-                                      records.type!,
-                                      style: const TextStyle(fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(records.address!,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                      )),
-                                  const SizedBox(height: 4),
-                                  Text("${records.houseno!}, ${records.landmark}, ${records.pincode}",
-                                      style: const TextStyle(
-                                        color: Colors.black54,
-                                      )),
+                                    const SizedBox(height: 4),
+                                    Text(records.address!,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12,
+                                        )),
+                                    const SizedBox(height: 4),
+                                    Text("${records.houseno!}, ${records.landmark}, ${records.pincode}",
+                                        style: const TextStyle(
+                                          color: Colors.black54,
+                                        )),
 
 
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            Column(
-                              children: [
-                                Icon(Icons.edit,color: Colors.green,),
-                                SizedBox(height: 15,),
-                                InkWell(
-                                  child: Icon(Icons.delete,color: Colors.red,),
-                                  onTap: (){
-                                    //con.deleteRecords(context, records.id!);
-                                    con.deleteAddress(context, records.id!);
-                                  },)
-                              ],
-                            )
-                          ],
+                              Column(
+                                children: [
+                                  Icon(Icons.edit,color: Colors.green,),
+                                  SizedBox(height: 15,),
+                                  InkWell(
+                                    child: Icon(Icons.delete,color: Colors.red,),
+                                    onTap: (){
+                                      //con.deleteRecords(context, records.id!);
+                                      con.deleteAddress(context, records.id!);
+                                    },)
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );

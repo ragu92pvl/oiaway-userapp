@@ -7,6 +7,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:state_extended/state_extended.dart';
 import 'package:userapp/constants/api_constants.dart';
 import 'package:userapp/flutter_flow/flutter_flow_theme.dart';
@@ -185,71 +186,30 @@ class _ProductDetailsPageState extends StateX<ProductDetailsPage> {
                         itemSize: 15,
                         glowColor: FlutterFlowTheme.of(context).secondaryColor,
                       ),
-                      widget.productData!.isEnquiry !=true ? FFButtonWidget(
-                        onPressed: () {
-                          // var request = EnquiryRequest();
-                          // PreferenceUtils().getUserId().then((value) {
-                          //   request.uid = value;
-                          //   // PreferenceUtils().getCityId().then((value) {
-                          //   //   request.cityId = value;
-                          //   //   request.pid = widget.productData.id!;
-                          //   //   _con?.enquiryPlaced(request, context);
-                          //   // });
-                          //   PreferenceUtils().getLat().then((value) {
-                          //     lat = value!;
-                          //   });
-                          //
-                          //   PreferenceUtils().getLng().then((value) {
-                          //     lng = value!;
-                          //     request.lat = lat.toString();
-                          //     request.lng = lng.toString();
-                          //     request.pid = widget.productData.id!;
-                          //     _con?.enquiryPlaced(request, context);
-                          //   });
-                          // });
+                      InkWell(
+                        onTap: (){
+                          context.pushNamed('product-offers-page',extra: {
+                            "productData":widget.productData
+                          });
                         },
-                        text: "Enquired",
-                        options: FFButtonOptions(
+                        child: Container(
                           width: 120,
-                          height: 40,
-                          color: Color(0xFF1B74E4),
-                          textStyle:
-                         AppStyle.fontSarabunMedium.override(fontSize: 18),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [AppColors.themeColor, AppColors.themeColor], // Gradient colors
+                              begin: Alignment.topCenter, // Gradient start
+                              end: Alignment.bottomCenter, // Gradient end
+                            ),
+                            borderRadius: BorderRadius.circular(10), // Rounded corners
+                            border: Border.all(color: Colors.white, width: 2), // Border
                           ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ):FFButtonWidget(
-                        onPressed: () {
-                          // var request = EnquiryRequest();
-                          // PreferenceUtils().getUserId().then((value) {
-                          //   request.uid = value;
-                          //   PreferenceUtils().getCityId().then((value) {
-                          //     request.cityId = value;
-                          //     request.pid = widget.productData.id!;
-                          //     _con?.enquiryPlaced(request, context);
-                          //   });
-                          // });
-                        },
-                        icon: Icon(
-                          Icons.check_outlined,
-                          size: 15,
-                          color: Color(0xFF1B74E4),
-                        ),
-                        text: "Enquired",
-                        options: FFButtonOptions(
-                          width: 120,
-                          height: 40,
-                          color: Colors.white,
-                          textStyle:
-                          AppStyle.fontSarabunMedium.override(fontSize: 12,color: AppColors.themeColor),
-                          borderSide: BorderSide(
-                            color: Color(0xFF1B74E4),
-                            width: 1,
+                          child: Center(
+                            child: Text(
+                              "Buy / Enquiry",
+                              style: AppStyle.fontSarabunBold.override(color: Colors.white,fontSize: 16),
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(8),
                         ),
                       )
                     ],

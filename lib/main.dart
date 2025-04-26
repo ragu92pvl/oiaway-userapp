@@ -9,19 +9,27 @@ import 'package:userapp/pages/address/add_address_page.dart';
 import 'package:userapp/pages/address/address_page.dart';
 import 'package:userapp/pages/category/sub_category_page.dart';
 import 'package:userapp/pages/dashboard/dashboard_page.dart';
+import 'package:userapp/pages/dashboard/orders/order_details_page.dart';
+import 'package:userapp/pages/dashboard/service/my_service_details_page.dart';
+import 'package:userapp/pages/grocery/grocery_product_page.dart';
 import 'package:userapp/pages/location/location_page.dart';
 import 'package:userapp/pages/login/login_page.dart';
 import 'package:userapp/pages/notifications/notification_page.dart';
+import 'package:userapp/pages/offers/product_offers_page.dart';
 import 'package:userapp/pages/packages/packages_list_page.dart';
+import 'package:userapp/pages/product/product_check_out_page.dart';
 import 'package:userapp/pages/product/product_details_page.dart';
 import 'package:userapp/pages/product/product_page.dart';
 import 'package:userapp/pages/records/add_records_page.dart';
 import 'package:userapp/pages/records/my_records_page.dart';
 import 'package:userapp/pages/register/register_page.dart';
+import 'package:userapp/pages/service/service_check_out_page.dart';
 import 'package:userapp/pages/service/service_list_packages_page.dart';
 import 'package:userapp/pages/service/service_package_details_page.dart';
 import 'package:userapp/pages/splash/splash_page.dart';
 import 'package:userapp/pages/success/package_payment_success_page.dart';
+import 'package:userapp/pages/success/product_success_page.dart';
+import 'package:userapp/pages/success/service_success_page.dart';
 
 import 'constants/app_colors.dart';
 import 'constants/app_style.dart';
@@ -208,6 +216,75 @@ class _MyAppState extends State<MyApp> {
             name: 'package-payment-success',
             builder: (BuildContext context, GoRouterState state) {
               return PackagePaymentSuccessPage();
+            },
+          ),
+          GoRoute(
+            path: 'service-check-out-page',
+            name: 'service-check-out-page',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var packageData = arguments['packageData'];
+              return ServiceCheckOutPage(packageData);
+            },
+          ),
+          GoRoute(
+            path: 'service-success-page',
+            name: 'service-success-page',
+            builder: (BuildContext context, GoRouterState state) {
+              return ServiceSuccessPage();
+            },
+          ),
+          GoRoute(
+            path: 'service-details-page',
+            name: 'service-details-page',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var serviceData = arguments['serviceData'];
+              return MyServiceDetailsPage(serviceData);
+            },
+          ),
+          GoRoute(
+            path: 'product-offers-page',
+            name: 'product-offers-page',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var productData = arguments['productData'];
+              return ProductOffersPage(productData);
+            },
+          ),
+          GoRoute(
+            path: 'product-check-out-page',
+            name: 'product-check-out-page',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var productData = arguments['productData'];
+              var offerData = arguments['offerData'];
+              return ProductCheckOutPage(productData,offerData);
+            },
+          ),
+          GoRoute(
+            path: 'product-success-page',
+            name: 'product-success-page',
+            builder: (BuildContext context, GoRouterState state) {
+              return ProductSuccessPage();
+            },
+          ),
+          GoRoute(
+            path: 'order-details-page',
+            name: 'order-details-page',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var orderBean = arguments['orderBean'];
+              return OrderDetailsPage(orderBean);
+            },
+          ),
+          GoRoute(
+            path: 'grocery-product-page',
+            name: 'grocery-product-page',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var categoryData = arguments['categoryData'];
+              return GroceryProductPage(categoryData);
             },
           ),
           // GoRoute(

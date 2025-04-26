@@ -12,6 +12,7 @@ class ApiConstants{
   static String register = BASE_URL+"register";
   static String homeData = BASE_URL+"homeData";
   static String homeServiceData = BASE_URL+"homeServiceData";
+  static String groceryData = BASE_URL+"groceryData";
   static String listPackages = BASE_URL+"listPackages";
   static String listSubCategory = BASE_URL+"listSubCategory";
   static String subCategoryByProduct = BASE_URL+"subCategoryByProduct";
@@ -43,5 +44,9 @@ class ApiConstants{
   static String listamcproducts = BASE_URL+"listamcproducts";
   static String listamcpackages = BASE_URL+"listamcpackages";
   static String updateamcproduct = BASE_URL+"updateamcproduct";
+  static String listproductoffers = BASE_URL+"listproductoffers";
+  static String placeproductorder = BASE_URL+"placeproductorder";
+  static String listproductorders = BASE_URL+"listproductorders";
+  static String listgroceryproducts = BASE_URL+"listgroceryproducts";
 
 }

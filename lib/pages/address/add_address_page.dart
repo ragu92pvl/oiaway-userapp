@@ -31,7 +31,7 @@ class _AddAddressPageState extends StateX<AddAddressPage> {
   String _address = '';
 
 
-  final apiKey = 'AIzaSyBRxE8E6WSJaIzLPx7zpGHEbo5djXx3bTY'; // Replace with your API key
+  final apiKey = 'AIzaSyAllf0gGdRTTog1ChI62srhdNZ-hVsEYe0'; // Replace with your API key
   // final _geocoding = GoogleMapsGeocoding(apiKey: 'AIzaSyAllf0gGdRTTog1ChI62srhdNZ-hVsEYe0'); // Replace with your API key
 
   void _onMapCreated(GoogleMapController controller) {
