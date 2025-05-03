@@ -28,6 +28,7 @@ import 'package:userapp/model/response/service/service_package_response.dart';
 import '../constants/api_constants.dart';
 import '../model/request/login/login_request.dart';
 import '../model/response/grocery/grocery_product_response.dart';
+import '../model/response/grocery/grocery_vendor_product_response.dart';
 import '../model/response/packages/amc_packages_response.dart';
 import '../model/response/product/amc_products_response.dart';
 import '../model/response/product/product_offer_response.dart';
@@ -563,6 +564,25 @@ class ApiService {
           "${ApiConstants.listgroceryproducts}/$catId");
       if (response.statusCode == 200) {
         return GroceryProductResponse.fromJson(response.data);
+      } else {
+        ValidationUtils.showAppToast(
+            'Failed to sign in. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to sign in. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error during sign in: $e');
+      throw e;
+    }
+  }
+
+  Future<GroceryVendorProductResponse> getGroceryVendorProducts(List<OverallGroceryProducts> cartList) async {
+    try {
+      String? userId  = await PreferenceUtils.getUserId();
+      final response = await dioClient.post(
+          "${ApiConstants.listgroceryproductvariant}",cartList);
+      if (response.statusCode == 200) {
+        return GroceryVendorProductResponse.fromJson(response.data);
       } else {
         ValidationUtils.showAppToast(
             'Failed to sign in. Status code: ${response.statusCode}');

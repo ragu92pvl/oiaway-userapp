@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:userapp/controller/grocery_controller.dart';
 import 'package:userapp/model/response/home/home_data_response.dart';
 import 'package:userapp/model/response/product/product_response.dart';
 import 'package:userapp/model/response/product/sub_category_response.dart';
@@ -11,6 +12,7 @@ import 'package:userapp/pages/category/sub_category_page.dart';
 import 'package:userapp/pages/dashboard/dashboard_page.dart';
 import 'package:userapp/pages/dashboard/orders/order_details_page.dart';
 import 'package:userapp/pages/dashboard/service/my_service_details_page.dart';
+import 'package:userapp/pages/grocery/grocery_checkout_page.dart';
 import 'package:userapp/pages/grocery/grocery_product_page.dart';
 import 'package:userapp/pages/location/location_page.dart';
 import 'package:userapp/pages/login/login_page.dart';
@@ -285,6 +287,15 @@ class _MyAppState extends State<MyApp> {
               final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
               var categoryData = arguments['categoryData'];
               return GroceryProductPage(categoryData);
+            },
+          ),
+          GoRoute(
+            path: 'grocery-checkout-page',
+            name: 'grocery-checkout-page',
+            builder: (BuildContext context, GoRouterState state) {
+              final Map<String, dynamic> arguments = state.extra as Map<String, dynamic>;
+              var controller = arguments['controller'] as GroceryController;
+              return GroceryCheckoutPage(controller);
             },
           ),
           // GoRoute(

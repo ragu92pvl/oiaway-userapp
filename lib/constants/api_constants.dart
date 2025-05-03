@@ -48,5 +48,6 @@ class ApiConstants{
   static String placeproductorder = BASE_URL+"placeproductorder";
   static String listproductorders = BASE_URL+"listproductorders";
   static String listgroceryproducts = BASE_URL+"listgroceryproducts";
+  static String listgroceryproductvariant = BASE_URL+"listgroceryproductvariant";
 
 }
