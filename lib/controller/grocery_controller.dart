@@ -24,6 +24,7 @@ class GroceryController extends StateXController{
   String? lng;
   String? cityId;
   int cartCount =0;
+  double total = 0.0;
 
   getHomeServiceData(BuildContext context) async {
     Loader.show();
@@ -79,9 +80,7 @@ class GroceryController extends StateXController{
     notifyClients();
   }
 
-  createCart(BuildContext context, Products products){
 
-  }
 
   getGroceryVendorProducts(List<OverallGroceryProducts> cartList){
     Loader.show();
@@ -93,6 +92,18 @@ class GroceryController extends StateXController{
       Loader.hide();
       print(e.toString());
     });
+  }
+
+  getTotal(){
+    total = 0.0;
+    vendorsList!.forEach((v){
+      v.products!.forEach((p){
+        if(p.count!=0){
+          total = total+  double.parse(p.price!) * p.count;
+        }
+      });
+    });
+    notifyClients();
   }
 
 }
