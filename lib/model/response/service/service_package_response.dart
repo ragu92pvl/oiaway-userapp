@@ -42,12 +42,13 @@ class PackageData {
   String? specification;
   String? packagePrice;
   String? cityId;
-  List<Gallery>? gallery;
-  SubPackages? subPackages;
+  Null? gallery;
+  Vendordetails? vendordetails;
   String? status;
 
   PackageData(
-      {this.servicePackageId,
+      {this.id,
+        this.servicePackageId,
         this.serviceCategoryId,
         this.title,
         this.description,
@@ -57,10 +58,11 @@ class PackageData {
         this.packagePrice,
         this.cityId,
         this.gallery,
-        this.subPackages,
-        this.status,this.id});
+        this.vendordetails,
+        this.status});
 
   PackageData.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     servicePackageId = json['servicePackageId'];
     serviceCategoryId = json['serviceCategoryId'];
     title = json['title'];
@@ -70,21 +72,16 @@ class PackageData {
     specification = json['specification'];
     packagePrice = json['packagePrice'];
     cityId = json['cityId'];
-    if (json['gallery'] != null) {
-      gallery = <Gallery>[];
-      json['gallery'].forEach((v) {
-        gallery!.add(new Gallery.fromJson(v));
-      });
-    }
-    subPackages = json['subPackages'] != null
-        ? new SubPackages.fromJson(json['subPackages'])
+    gallery = json['gallery'];
+    vendordetails = json['vendordetails'] != null
+        ? new Vendordetails.fromJson(json['vendordetails'])
         : null;
     status = json['status'];
-    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['servicePackageId'] = this.servicePackageId;
     data['serviceCategoryId'] = this.serviceCategoryId;
     data['title'] = this.title;
@@ -94,91 +91,88 @@ class PackageData {
     data['specification'] = this.specification;
     data['packagePrice'] = this.packagePrice;
     data['cityId'] = this.cityId;
-    if (this.gallery != null) {
-      data['gallery'] = this.gallery!.map((v) => v.toJson()).toList();
-    }
-    if (this.subPackages != null) {
-      data['subPackages'] = this.subPackages!.toJson();
+    data['gallery'] = this.gallery;
+    if (this.vendordetails != null) {
+      data['vendordetails'] = this.vendordetails!.toJson();
     }
     data['status'] = this.status;
     return data;
   }
 }
 
-class Gallery {
-  String? packageGallaryId;
-  String? packageId;
-  String? fileName;
-  String? status;
-  String? dom;
-
-  Gallery(
-      {this.packageGallaryId,
-        this.packageId,
-        this.fileName,
-        this.status,
-        this.dom});
-
-  Gallery.fromJson(Map<String, dynamic> json) {
-    packageGallaryId = json['package_gallary_id'];
-    packageId = json['package_id'];
-    fileName = json['file_name'];
-    status = json['status'];
-    dom = json['dom'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['package_gallary_id'] = this.packageGallaryId;
-    data['package_id'] = this.packageId;
-    data['file_name'] = this.fileName;
-    data['status'] = this.status;
-    data['dom'] = this.dom;
-    return data;
-  }
-}
-
-class SubPackages {
+class Vendordetails {
   String? id;
-  String? packageId;
-  String? serviceName;
-  String? servicePrice;
-  String? serviceOffer;
-  String? serviceImage;
-  String? createdAt;
+  String? shopname;
+  String? username;
+  String? mobile;
+  String? password;
+  String? image;
+  String? shoptype;
+  String? city;
+  String? address;
+  String? deviceToken;
+  String? livestatus;
   String? status;
+  String? email;
+  String? createAt;
+  String? updateAt;
+  String? isactive;
 
-  SubPackages(
+  Vendordetails(
       {this.id,
-        this.packageId,
-        this.serviceName,
-        this.servicePrice,
-        this.serviceOffer,
-        this.serviceImage,
-        this.createdAt,
-        this.status});
+        this.shopname,
+        this.username,
+        this.mobile,
+        this.password,
+        this.image,
+        this.shoptype,
+        this.city,
+        this.address,
+        this.deviceToken,
+        this.livestatus,
+        this.status,
+        this.email,
+        this.createAt,
+        this.updateAt,
+        this.isactive});
 
-  SubPackages.fromJson(Map<String, dynamic> json) {
+  Vendordetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    packageId = json['package_id'];
-    serviceName = json['service_name'];
-    servicePrice = json['service_price'];
-    serviceOffer = json['service_offer'];
-    serviceImage = json['service_image'];
-    createdAt = json['created_at'];
+    shopname = json['shopname'];
+    username = json['username'];
+    mobile = json['mobile'];
+    password = json['password'];
+    image = json['image'];
+    shoptype = json['shoptype'];
+    city = json['city'];
+    address = json['address'];
+    deviceToken = json['deviceToken'];
+    livestatus = json['livestatus'];
     status = json['status'];
+    email = json['email'];
+    createAt = json['create_at'];
+    updateAt = json['update_at'];
+    isactive = json['isactive'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['package_id'] = this.packageId;
-    data['service_name'] = this.serviceName;
-    data['service_price'] = this.servicePrice;
-    data['service_offer'] = this.serviceOffer;
-    data['service_image'] = this.serviceImage;
-    data['created_at'] = this.createdAt;
+    data['shopname'] = this.shopname;
+    data['username'] = this.username;
+    data['mobile'] = this.mobile;
+    data['password'] = this.password;
+    data['image'] = this.image;
+    data['shoptype'] = this.shoptype;
+    data['city'] = this.city;
+    data['address'] = this.address;
+    data['deviceToken'] = this.deviceToken;
+    data['livestatus'] = this.livestatus;
     data['status'] = this.status;
+    data['email'] = this.email;
+    data['create_at'] = this.createAt;
+    data['update_at'] = this.updateAt;
+    data['isactive'] = this.isactive;
     return data;
   }
 }

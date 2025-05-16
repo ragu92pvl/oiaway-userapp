@@ -163,7 +163,7 @@ class _HomePageState extends StateX<HomePage> {
               ),
               Tab(
                 icon: Icon(Icons.miscellaneous_services),
-                text: "Home Service",
+                text: "Service",
               ),
               Tab(
                 icon: Icon(Icons.store),

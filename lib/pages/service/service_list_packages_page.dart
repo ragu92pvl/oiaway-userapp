@@ -102,15 +102,47 @@ class _ServiceListPackagesPageState extends StateX<ServiceListPackagesPage> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(height: 4),
-                                const Row(
-                                  children: [
-                                    Icon(Icons.star_border, size: 16, color: Colors.orange),
-                                    Icon(Icons.star_border, size: 16, color: Colors.orange),
-                                    Icon(Icons.star_border, size: 16, color: Colors.orange),
-                                    Icon(Icons.star_border, size: 16, color: Colors.orange),
-                                    Icon(Icons.star_border, size: 16, color: Colors.grey),
-                                  ],
+                                Container(
+                                  height: 30,
+                                  child: Padding(
+                                    padding:
+                                    EdgeInsetsDirectional
+                                        .fromSTEB(
+                                        0, 0, 0, 0),
+                                    child: Container(
+                                      decoration:
+                                      BoxDecoration(
+                                        color: Color(
+                                            0xFFF9F4F4),
+                                        borderRadius:
+                                        BorderRadius
+                                            .circular(
+                                            5),
+                                        shape: BoxShape
+                                            .rectangle,
+                                      ),
+                                      child: Column(
+                                        mainAxisSize:MainAxisSize.min,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment
+                                            .center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Text(
+                                              service.vendordetails!.shopname!,
+                                              style: AppStyle.fontSarabunMedium.override(fontSize: 10,color: Colors.black54),
+                                            ),
+                                          )],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  children: List.generate(int.parse(service.rating!), (index) {
+                                    return  Icon(Icons.star_border, size: 16, color: Colors.orange);
+                                  }),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
